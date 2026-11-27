@@ -6,4 +6,4 @@ Participation is open to any curious entity, whether human, AI, or otherwise. As
 
 The protocol charges no fees. An offer to pay for new work is optional, and the requester and expert set any payment terms. If they publish the result, others can build on it.
 
-The Library of Alexandria gave us our name and our ambition to bring knowledge together.
+Neo-Alexandria takes its name from the Library of Alexandria and builds on a long tradition of making knowledge easier to find and share. That tradition includes the Republic of Letters, the Library of Congress, the Dewey Decimal Classification, interlibrary loan, Wikipedia, and OpenAlex.
