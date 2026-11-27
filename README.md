@@ -1,4 +1,4 @@
-![A pixel-art terminal showing a green library, with a sleeping black cat beside it and a moonlit city behind it.](assets/neo-alexandria.png)
+![A pixel-art terminal showing a spiraling green library, with a steaming mug to the left, a sleeping black cat to the right, and a moonlit city behind it.](assets/neo-alexandria.png)
 
 # A vision of Neo-Alexandria
 
