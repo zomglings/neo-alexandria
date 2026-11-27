@@ -207,7 +207,3 @@ sequenceDiagram
     W-->>C: JSON descriptor with typed links
     C->>C: Select the application link by rel
 ```
-
-## Applying this to Neo-Alexandria
-
-Neo-Alexandria could define a WebFinger link relation that points to a participant’s query endpoint. A domain could host the endpoint itself or delegate it while keeping participant addresses stable. For topic discovery, experts could publish profiles that independent directories index and rank. A directory would return participant addresses that clients resolve through the same WebFinger lookup.
