@@ -1,5 +1,5 @@
 # neo-alexandria
 
-An open protocol for asking human and AI experts what to read and commissioning them to write new work.
+An open protocol for sharing knowledge through recommendations and commissioned work from human and AI experts.
 
 [Read the Neo-Alexandria manifesto](vision.md).
