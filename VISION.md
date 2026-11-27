@@ -1,33 +1,23 @@
-# The Neo-Alexandria Vision
+# The Neo-Alexandria Manifesto
 
-Neo-Alexandria is an open, decentralized protocol for asking experts what to read and commissioning them to write new work. Anyone on the network can ask a human or AI expert for a recommendation in their field, or name a price for a document they want that expert to write.
+Sometimes the most valuable answer to a question is a book you would never have found on your own. An expert knows which book to recommend and why it speaks to the question you actually asked. Sometimes that same expert can see the gap in the literature and write what you need.
 
-The name comes from the Library of Alexandria. In Neo-Alexandria, the collection and the people and agents who know it are spread across the network. A question can lead someone to a book they might otherwise overlook. It can also lead to a new work that others can find and recommend.
+We want anyone to be able to ask for either kind of help. Neo-Alexandria is an open, decentralized protocol for asking a human or AI expert what to read and offering them a price to write something new. It takes its name from the Library of Alexandria and borrows its ambition to bring knowledge together. Our library lives wherever people and agents collect, recommend, and create work that others can use.
 
-## Recommendations and commissions
+## The freedom to ask
 
-Suppose you want to understand why an irrigation technique that works in trials falls short on small farms. An expert might recommend one field study and tell you which section speaks to your question. If the evidence is scattered, you might offer to pay that expert for a short review that brings the studies together. The expert can accept, propose different terms, or decline. When the parties agree to share the result, it can become a reference for the next person who asks.
+We mean permissionless in the way email is permissionless. You can run a client yourself or choose a provider. Either way, you can reach people on independently operated systems without registering with a central authority. Recipients decide whose messages to accept and which requests to take on. People can ask the experts whose work they trust, and communities can decide for themselves how to recognize expertise.
 
-The protocol is token-free and carries no protocol fees. A commission records what the requester wants, the price they offer, and the terms the parties agree to. The parties choose how to settle payment for the expert's work.
+The protocol is token-free and carries no protocol fees. When you commission a document, you and the expert agree on a price, how to pay, and who can read the work. If you choose to make the result public, something one person paid to learn can become part of what everyone else can read.
 
-## Participation like email
+## The freedom to build a client
 
-Anyone can run their own client or use a service that operates one for them. Independently operated systems can discover and communicate with one another through a shared public specification. Participants can join without registering with a central authority. As with email, recipients decide which messages to accept and whom to engage.
+A public specification makes that freedom practical. It defines how peers communicate and what a secure client must do. Anyone should be able to give the specification to a coding agent and generate a complete client they can verify and run. That puts building a client within reach of more people, including those whose needs differ from those of the original developers.
 
-Experts can make their areas of expertise discoverable. Requesters can use a participant's published work, citations, or recommendations from people they trust to decide whom to ask. Different communities can make those judgments for themselves while still exchanging requests over the same protocol.
+We want many independently built clients in everyday use. They can share the rules of the protocol while using different code, libraries, and languages. When a flaw is specific to one implementation, people using others can keep exchanging work. That is what we mean by security through diversity.
 
-## A specification for generating secure clients
+## A library we can build together
 
-Someone should be able to give the public specification to a coding agent and generate a complete client they can verify and run. The specification must define the rules peers agree on, including how they discover one another and exchange messages. It must also state the threat model and the security requirements for clients, including how to protect local keys, verify who agreed to a commission, and handle documents from untrusted peers. A public conformance suite should cover successful exchanges and inputs a client must reject.
+This idea grows out of Ken and Ongo. Ken gives people and agents a portable way to keep publications, notes, and the connections among them. Ongo takes research requests, records findings in Ken, and publishes work with the access its author chooses. Neo-Alexandria opens that exchange to people who keep their collections elsewhere, do research differently, or use software they built themselves. [Ken](https://github.com/zomglings/ken#readme) · [Ongo](https://github.com/zomglings/ongo#readme)
 
-Coding agents can make it practical for more people to build and maintain their own implementations. The specification should define required behavior and leave implementers room to choose their languages, libraries, and internal designs. When the network runs genuinely independent implementations, a flaw specific to one can affect its users while other clients keep working. The shared specification and common dependencies deserve scrutiny because flaws there can affect several clients at once.
-
-## Building on Ken and Ongo
-
-Ken gives people and agents a portable catalog for publications, notes, and relationships such as citations. Ongo takes research requests, records findings in Ken, and can publish work publicly or with restricted access. Together they provide a way to keep a research record and turn a question into work someone can read. [Ken](https://github.com/zomglings/ken#readme) · [Ongo](https://github.com/zomglings/ongo#readme)
-
-Neo-Alexandria extends that workflow across independent operators. An expert using Ongo should be able to answer a requester using a client written by somebody else. Each participant can choose how they keep their references and carry out their research.
-
-## First demonstration
-
-Two people independently generate clients from the published specification and run them on separate systems. One discovers the other, asks for a reading recommendation, and receives a reference with a short explanation. They then agree on the scope and price of a small commission, and the expert delivers the finished document. That would show that someone can build a client from the public specification and use it to take part in the network.
+If you’ve ever wished someone had pointed you to the right book sooner, or written the one you needed, we invite you to help shape this library.
