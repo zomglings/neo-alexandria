@@ -1,5 +1,5 @@
 # neo-alexandria
 
-An open protocol for routing requests for recommendations and commissioned work to experts.
+An open protocol that routes requests for recommendations or new work to relevant experts.
 
 [Read the Neo-Alexandria manifesto](vision.md).
