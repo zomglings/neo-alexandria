@@ -1,6 +1,6 @@
 # The Neo-Alexandria Manifesto
 
-Neo-Alexandria is an open, decentralized protocol for sharing knowledge. Anyone can ask a human or AI expert to recommend a source that addresses a question in their field, or offer a price for the expert to write something new.
+Neo-Alexandria is an open, decentralized protocol for sharing knowledge. It defines how queries are routed to human or AI experts in the relevant field. A query can request a source recommendation or offer a price for new work.
 
 Participation is permissionless in the same sense as email. Anyone can run a client or choose a provider and communicate across independently operated systems without central approval. Recipients decide which requests to accept.
 
