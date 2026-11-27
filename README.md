@@ -2,4 +2,4 @@
 
 An open protocol that routes requests for recommendations or new work to relevant experts.
 
-[Read the Neo-Alexandria manifesto](vision.md).
+[Read the vision for Neo-Alexandria](vision.md).

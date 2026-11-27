@@ -1,4 +1,4 @@
-# The Neo-Alexandria Manifesto
+# A vision of Neo-Alexandria
 
 Neo-Alexandria is an open, decentralized protocol for sharing knowledge. It defines how queries are routed to experts in the relevant field. A query can request a source recommendation or ask an expert to write something new.
 
