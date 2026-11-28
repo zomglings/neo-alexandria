@@ -2,7 +2,7 @@
 
 Neo-Alexandria has two discovery questions. Given a topic, which experts might help? Given an expert’s address, where should a client deliver the query? Most of the protocols here start from a known address. BitTorrent starts from a content identifier, and local service discovery can start from a service type.
 
-Six of these nine examples use conventional DNS when resolving domain names. Four use service records such as `MX`, `SRV`, or `NAPTR` to select a server. One uses multicast DNS on the local network. Two can discover peers or devices through their own mechanisms.
+Seven of these ten examples use conventional DNS when resolving domain names. Four use records such as `MX`, `SRV`, or `NAPTR` to select a server. AT Protocol can use a `TXT` record to resolve a handle to an account identifier. One example uses multicast DNS on the local network. Two can discover peers or devices through their own mechanisms.
 
 | Protocol | Starting point | How it locates a destination |
 | --- | --- | --- |
@@ -11,6 +11,7 @@ Six of these nine examples use conventional DNS when resolving domain names. Fou
 | [SIP](#sip) | SIP URI | DNS `NAPTR`, `SRV`, and address records |
 | [Matrix](#matrix) | Homeserver name | HTTPS delegation and DNS |
 | [ActivityPub](#activitypub) | Actor URL | HTTPS actor document gives the inbox URL |
+| [AT Protocol](#at-protocol) | Account handle or DID | DNS or HTTPS resolves the handle. The DID document gives the data server URL. |
 | [DNS-SD over mDNS](#dns-sd-over-mdns) | Local service type | Multicast DNS records describe service instances |
 | [BitTorrent DHT](#bittorrent-dht) | Torrent info hash | A distributed hash table returns peer contacts |
 | [Bluetooth LE](#bluetooth-le) | Devices within radio range | Devices advertise and scanners listen |
@@ -121,16 +122,46 @@ sequenceDiagram
 
 ## ActivityPub
 
-The sending server starts with a recipient’s actor URI. It fetches the actor document, reads the `inbox` property, and sends the activity by HTTP `POST` to that inbox URL. DNS resolves the hostnames in those URLs. Some implementations add an earlier lookup for human-readable handles. Mastodon uses WebFinger to turn a handle such as `@ada@example.org` into an actor URL. [ActivityPub actor objects](https://www.w3.org/TR/activitypub/#actor-objects) · [Federated delivery](https://www.w3.org/TR/activitypub/#delivery) · [Mastodon WebFinger](https://docs.joinmastodon.org/spec/webfinger/)
+An ActivityPub actor has a URI and an actor document that lists its inbox and outbox. A client can submit an ActivityStreams activity to its own actor’s `outbox`. For federation, the sending server uses the activity’s audience to identify recipients, fetches their actor documents, and sends the activity by HTTP `POST` to the inbox URLs it discovers. DNS resolves the hostnames in those URLs. Mastodon uses WebFinger to turn a handle such as `@ada@example.org` into an actor URL. [Actor objects](https://www.w3.org/TR/activitypub/#actor-objects) · [Client submission](https://www.w3.org/TR/activitypub/#client-to-server-interactions) · [Federated delivery](https://www.w3.org/TR/activitypub/#delivery) · [Mastodon WebFinger](https://docs.joinmastodon.org/spec/webfinger/)
+
+A `Follow` goes to the target’s inbox. The recipient’s server can accept or reject it automatically or after review. An acceptance is a separate activity sent back to the follower. The recipient can then include that actor when delivering posts addressed to its followers. [Follow approval](https://www.w3.org/TR/activitypub/#follow-activity-inbox) · [Followers collection](https://www.w3.org/TR/activitypub/#followers)
 
 ```mermaid
 sequenceDiagram
+    participant C as Sender's client
     participant S as Sending server
     participant A as Recipient actor URL
-    participant I as Recipient inbox URL
+    participant R as Receiving server
+    C->>S: POST the activity to the sender outbox
     S->>A: GET the ActivityStreams actor document
     A-->>S: Actor document with inbox URL
-    S->>I: POST the activity
+    S->>R: POST the activity to the recipient inbox
+    opt Recipient responds to a Follow
+        R->>S: POST a separate Accept or Reject to the sender inbox
+    end
+```
+
+## AT Protocol
+
+Bluesky uses AT Protocol for its public social data. A handle such as `ada.example.org` resolves to a decentralized identifier (DID) through a DNS `TXT` record at `_atproto.ada.example.org` or an HTTPS request to `ada.example.org/.well-known/atproto-did`. The client can perform the lookup or ask a network service to do it. The resolver checks the DID document’s `alsoKnownAs` field for the matching handle. The document also gives the account’s signing key and the URL of its personal data server (PDS). AT Protocol supports `did:plc`, resolved through the PLC directory, and `did:web`, resolved over HTTPS. [Handle resolution](https://atproto.com/specs/handle#handle-resolution) · [DID document](https://atproto.com/specs/did)
+
+The PDS hosts the account’s repository and signs its commits. An `at://` URI can identify a record by account, collection, and record key. Relays subscribe to updates from many PDSs and aggregate them into a stream. Bluesky’s AppView indexes that stream to serve feeds, search, and other views of the public records. [AT URI scheme](https://atproto.com/specs/at-uri-scheme) · [Repository specification](https://atproto.com/specs/repository) · [Relays and AppViews](https://atproto.com/guides/the-at-stack)
+
+In Bluesky, following an account creates an `app.bsky.graph.follow` record in the follower’s own repository. The record points to the target’s DID, and the AppView indexes it as part of the public social graph. A post author can set reply permissions separately with an `app.bsky.feed.threadgate` record. [Follow record](https://raw.githubusercontent.com/bluesky-social/atproto/main/packages/api/lexicons/app/bsky/graph/follow.json) · [Threadgate record](https://raw.githubusercontent.com/bluesky-social/atproto/main/packages/api/lexicons/app/bsky/feed/threadgate.json)
+
+```mermaid
+sequenceDiagram
+    participant C as Client
+    participant I as Identity resolution
+    participant P as Writer's PDS
+    participant R as Relay
+    participant A as AppView
+    C->>I: Resolve the target handle, then its DID
+    I-->>C: Verified target DID and target PDS URL
+    C->>P: Write a follow record with the target DID
+    P-->>R: Stream the signed repository update
+    R-->>A: Stream aggregated updates
+    C->>A: Read the indexed social graph
 ```
 
 ## DNS-SD over mDNS
