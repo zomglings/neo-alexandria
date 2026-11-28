@@ -1,4 +1,4 @@
-# Semantic discovery and topic classification
+# Subject classification
 
 A shared topic vocabulary lets two catalogs describe the same subject with the same identifier, even if their users search for it in different words. Libraries use subject classifications to arrange collections and subject headings to find works across them. The same kind of vocabulary can describe an area of expertise. Assigning a topic to a record and deciding which topics belong in the vocabulary are separate decisions.
 
